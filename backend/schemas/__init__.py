@@ -1,0 +1,3 @@
+from schemas.cadastroAssociacao import CadastroAssociacaoSchema, BuscaAssociacaoSchema, CadastroAssociacaoDeleteSchema
+from schemas.formularioComunidade import FormularioComunidadeSchema
+from schemas.error import ErrorSchema
