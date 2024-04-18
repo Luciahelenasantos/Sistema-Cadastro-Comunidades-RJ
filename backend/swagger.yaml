@@ -248,15 +248,7 @@ definitions:
             nome_coord:
                 type: string
                 description: Nome do coordenador da associação.
-            data_cadastro:
-                type: string
-                format: date-time
-                description: Data e hora do cadastro da associação.
-            formularios:
-                type: array
-                items:
-                $ref: '#/definitions/FormularioComunidade'
-
+            
     FormularioComunidade:
         type: object
         required:
@@ -274,4 +266,3 @@ definitions:
             resposta:
                 type: string
                 description: "Resposta à pergunta formulada."
-                
