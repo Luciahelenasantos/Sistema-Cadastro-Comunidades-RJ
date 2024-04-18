@@ -136,7 +136,7 @@ paths:
           type: integer
           format: int32
           required: false
-          default: 10
+          default: 5
           description: Quantidade de cadastros por página.
       responses:
         200:
