@@ -1,0 +1,277 @@
+swagger: '2.0'
+info:
+  title: API de Gestão de Associações de Comunidades Rio de Janeiro
+  description: API para gerenciamento de cadastros e formulários de associações de moradores.
+  version: "1.0"
+host: localhost:5000
+basePath: /
+schemes:
+  - http
+
+paths:
+  /cadastrar:
+    post:
+      summary: Cria um novo cadastro da associação de moradores
+      description: Adiciona um novo cadastro ao sistema.
+      parameters:
+        - in: body
+          name: cadastro
+          description: Dados do cadastro.
+          required: true
+          schema:
+            $ref: '#/definitions/CadastroAssociacao'
+      responses:
+        201:
+          description: Cadastro criado com sucesso
+          examples:
+            application/json:
+              cod_assoc: 1
+              nome_assoc: "Associação Novo Amanhecer"
+              endereco: "Rua das Flores, 123"
+              telefone: "(21) 1234-5678"
+              nome_coord: "Maria de Souza"
+        400:
+          description: Erro de validação dos dados
+          examples:
+            application/json:
+              message: "Dados de entrada inválidos"
+              errors: 
+                telefone: "Formato de telefone inválido"
+
+  /formularios:
+    post:
+      summary: Adiciona um novo formulário à associação de moradores
+      description: Cria um novo formulário para uma associação específica, vinculando-o ao cadastro da associação.
+      parameters:
+        - in: body
+          name: formulario
+          description: Dados do formulário a ser criado.
+          required: true
+          schema:
+            $ref: '#/definitions/FormularioComunidade'
+      responses:
+        201:
+          description: Formulário criado com sucesso.
+          examples:
+            application/json:
+              cod_assoc: 1
+              pergunta: "Qual é a principal atividade da associação?"
+              resposta: "Atividades comunitárias e educacionais"
+        400:
+          description: Dados de entrada inválidos.
+          examples:
+            application/json:
+              message: "Dados de entrada inválidos"
+              errors:
+                pergunta: "Campo obrigatório."
+        404:
+          description: Cadastro associado não encontrado.
+          examples:
+            application/json:
+              message: "Cadastro associado não encontrado"
+        500:
+          description: Erro interno no servidor.
+          examples:
+            application/json:
+              message: "Erro ao processar sua requisição"
+
+  /cadastros/{cod_assoc}:
+    get:
+      summary: Busca um cadastro de associação de moradores por código
+      description: Retorna o cadastro da associação correspondente ao código fornecido.
+      parameters:
+        - in: path
+          name: cod_assoc
+          required: true
+          type: integer
+          format: int32
+          description: Código identificador do cadastro da associação.
+      responses:
+        200:
+          description: Cadastro encontrado e retornado com sucesso.
+          schema:
+            $ref: '#/definitions/CadastroAssociacao'
+          examples:
+            application/json:
+              cod_assoc: 1
+              nome_assoc: "Associação Amigos do Bairro"
+              endereco: "Rua das Flores, 123"
+              telefone: "(21) 99999-9999"
+              nome_coord: "José Silva"
+              data_cadastro: "2021-07-21T17:32:28Z"
+              formularios:
+                - id: 101
+                  pergunta: "Qual o principal objetivo da associação?"
+                  resposta: "Promover atividades comunitárias e culturais"
+        404:
+          description: Cadastro não encontrado.
+          examples:
+            application/json:
+              message: "Cadastro não encontrado"
+        500:
+          description: Erro interno no servidor.
+          examples:
+            application/json:
+              message: "Erro ao processar sua requisição"
+
+  /cadastros:
+    get:
+      summary: Busca cadastros de associações
+      description: Permite a busca de cadastros por nome de associação, com paginação.
+      parameters:
+        - in: query
+          name: nome_assoc
+          type: string
+          required: false
+          description: Nome parcial ou completo da associação para filtrar os resultados.
+        - in: query
+          name: page
+          type: integer
+          format: int32
+          required: false
+          default: 1
+          description: Número da página para a paginação dos resultados.
+        - in: query
+          name: per_page
+          type: integer
+          format: int32
+          required: false
+          default: 10
+          description: Quantidade de cadastros por página.
+      responses:
+        200:
+          description: Lista de cadastros retornada com sucesso.
+          schema:
+            type: object
+            properties:
+              cadastros:
+                type: array
+                items:
+                  $ref: '#/definitions/CadastroAssociacao'
+              total:
+                type: integer
+                description: Total de cadastros encontrados.
+              pages:
+                type: integer
+                description: Total de páginas disponíveis.
+              current_page:
+                type: integer
+                description: Número da página atual.
+          examples:
+            application/json:
+              cadastros: 
+                - cod_assoc: 1
+                  nome_assoc: "Associação Amigos do Bairro"
+                  endereco: "Rua das Flores, 123"
+                  telefone: "(21) 99999-9999"
+                  nome_coord: "José Silva"
+                  data_cadastro: "2021-07-21T17:32:28Z"
+              total: 1
+              pages: 1
+              current_page: 1
+        404:
+          description: Nenhum cadastro encontrado.
+          examples:
+            application/json:
+              message: "Nenhum cadastro encontrado"
+        500:
+          description: Erro interno no servidor.
+          examples:
+            application/json:
+              message: "Erro ao processar sua requisição"
+
+  /cadastro/{nome_assoc}:
+    delete:
+      summary: Deleta um cadastro de associação
+      description: Deleta um cadastro específico pelo nome da associação, removendo todas as dependências relacionadas.
+      parameters:
+        - in: path
+          name: nome_assoc
+          type: string
+          required: true
+          description: Nome da associação para identificar o cadastro a ser deletado.
+      responses:
+        200:
+          description: Cadastro deletado com sucesso.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Cadastro deletado com sucesso"
+        404:
+          description: Cadastro não encontrado.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Cadastro não encontrado"
+        500:
+          description: Erro interno no servidor.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Erro ao processar sua requisição"
+
+definitions:
+    CadastroAssociacao:
+        type: object
+        required:
+            - nome_assoc
+            - endereco
+            - telefone
+            - nome_coord
+        properties:
+            cod_assoc:
+                type: integer
+                format: int32
+                description: Código identificador do cadastro da associação.
+            nome_assoc:
+                type: string
+                description: Nome da associação.
+            endereco:
+                type: string
+                description: Endereço da associação.
+            telefone:
+                type: string
+                example: "(21) 2267-3897"
+                description: Telefone de contato da associação.
+            nome_coord:
+                type: string
+                description: Nome do coordenador da associação.
+            data_cadastro:
+                type: string
+                format: date-time
+                description: Data e hora do cadastro da associação.
+            formularios:
+                type: array
+                items:
+                $ref: '#/definitions/FormularioComunidade'
+
+    FormularioComunidade:
+        type: object
+        required:
+            - cod_assoc
+            - pergunta
+            - resposta
+        properties:
+            cod_assoc:
+                type: integer
+                format: int32
+                description: "Código identificador do cadastro associado."
+            pergunta:
+                type: string
+                description: "Pergunta formulada no formulário."
+            resposta:
+                type: string
+                description: "Resposta à pergunta formulada."
+                
