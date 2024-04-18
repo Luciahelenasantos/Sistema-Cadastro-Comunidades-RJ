@@ -243,7 +243,7 @@ definitions:
                 description: Endereço da associação.
             telefone:
                 type: string
-                example: "(21) 2267-3897"
+                example: "(00) 00000-0000"
                 description: Telefone de contato da associação.
             nome_coord:
                 type: string
