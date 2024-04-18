@@ -1,0 +1,67 @@
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    line-height: 1.6;
+  }
+  
+  input[type="text"], button {
+    margin: 10px 0;
+    padding: 10px;
+    width: 200px;
+  }
+  
+  button {
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+  }
+  
+  #cadastrosContainer {
+    margin-top: 20px;
+  }
+  
+  #cadastrosContainer div {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+  }
+  
+  input[type="number"], input[type="text"], button {
+    margin: 10px 0;
+    padding: 10px;
+    width: 250px;
+  }
+  
+  #deleteForm input, #deleteForm button {
+    margin-top: 10px;
+    padding: 8px;
+    width: 300px;
+  }
+  
+  #refreshButton {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  #refreshButton:hover {
+    background-color: #45a049;
+  }
+  
+  .deleteButton {
+    padding: 10px 20px;
+    background-color: #f44336; /* Cor vermelha */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .deleteButton:hover {
+    background-color: #d32f2f; /* Um vermelho mais escuro para o hover */
+  }
