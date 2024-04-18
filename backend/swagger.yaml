@@ -231,10 +231,6 @@ definitions:
             - telefone
             - nome_coord
         properties:
-            cod_assoc:
-                type: integer
-                format: int32
-                description: Código identificador do cadastro da associação.
             nome_assoc:
                 type: string
                 description: Nome da associação.
