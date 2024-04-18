@@ -20,3 +20,4 @@ class FormularioComunidade(Base):
         self.pergunta = pergunta
         self.resposta = resposta
         # A data_formulario será definida pelo default na definição da coluna
+        

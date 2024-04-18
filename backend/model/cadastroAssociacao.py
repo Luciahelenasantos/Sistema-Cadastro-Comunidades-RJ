@@ -36,3 +36,4 @@ class CadastroAssociacao(Base):
                     resposta=formulario['resposta']
                 )
                 self.formularios.append(novo_formulario)
+                
