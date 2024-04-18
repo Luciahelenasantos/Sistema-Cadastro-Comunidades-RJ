@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de Associações de Comunidades</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Associações de Comunidades</h1>
+    
+    <h2>Criar Cadastro</h2>
+    <form id="cadastroForm">
+        <input type="text" id="nome_assoc" placeholder="Nome da Associação" required>
+        <input type="text" id="endereco" placeholder="Endereço" required>
+        <input type="text" id="telefone" placeholder="Telefone (00) 00000-0000" required>
+        <input type="text" id="nome_coord" placeholder="Nome do Coordenador" required>
+        <button type="submit">Enviar Cadastro</button>
+    </form>
+
+    <h2>Criar Formulário para Associação</h2>
+    <form id="formularioForm">
+        <input type="number" id="cod_assoc" placeholder="Código da Associação" required>
+        <input type="text" id="pergunta" placeholder="Pergunta" required>
+        <input type="text" id="resposta" placeholder="Resposta" required>
+        <button type="submit">Enviar Formulário</button>
+    </form>
+
+    <button id="refreshButton">Atualizar Cadastros</button>
+
+    <h2>Buscar Cadastros de Associações</h2>
+    <form id="searchForm">
+        <input type="text" id="searchInput" placeholder="Nome da Associação">
+        <button type="submit">Buscar</button>
+    </form>
+
+    <h2>Cadastros Existentes</h2>
+    <div id="cadastrosContainer"></div>
+    <div id="pagination">
+        <button onclick="changePage(-1)">Anterior</button>
+        <span id="currentPage"></span>
+        <button onclick="changePage(1)">Próximo</button>
+    </div>
+
+    <h2>Apagar Cadastro</h2>
+    <form id="deleteForm">
+        <input type="text" id="deleteInput" placeholder="Nome da Associação para apagar" required>
+        <button class="deleteButton" type="submit">Apagar Cadastro</button>
+    </form>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
