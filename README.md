@@ -29,44 +29,51 @@ Este projeto consiste em uma aplicação para gerenciamento de cadastros e formu
 
 - Clone o repositório para sua máquina local:
 
-bash
-git clone https://github.com/Luciahelenasantos/Sistema-Cadastro-Comunidades-RJ.git
-cd Sistema-Cadastro-Comunidades-RJ
+  ```bash
+  git clone https://github.com/Luciahelenasantos/Sistema-Cadastro-Comunidades-RJ.git
+  cd Sistema-Cadastro-Comunidades-RJ
+  ```
 
 - Navegue até a pasta do backend:
 
-bash
-cd backend
+  ```bash
+  cd backend
+  ```
 
 - Instale as dependências usando pip:
 
-bash
-pip install -r requirements.txt
+  ```bash
+  pip install -r requirements.txt
+  ```
 
 - Execute a aplicação:
 
-bash
-python app.py
+  ```bash
+  python app.py
+  ```
 
 ### Frontend
 
 - Navegue até a pasta do frontend:
 
-bash
-cd frontend
+  ```bash
+  cd frontend
+  ```
 
 - Se ainda não tiver, instale o Node.js e o pacote http-server globalmente:
 
-bash
-npm install -g http-server
+  ```bash
+  npm install -g http-server
+  ```
 
 - Inicie o servidor com suporte a CORS:
 
-bash
-http-server -c-1 --cors
+  ```bash
+  http-server -c-1 --cors
+  ```
 
-A interface do usuário estará disponível em http://localhost:8080/cadastros.html.
+A interface do usuário estará disponível em `http://localhost:8080/cadastros.html`.
 
 ### Documentação da API
 
-Acesse a documentação da API via Swagger em http://localhost:5000/apidocs.
+Acesse a documentação da API via Swagger em `http://localhost:5000/apidocs`.
